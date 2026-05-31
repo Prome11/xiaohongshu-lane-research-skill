@@ -28,6 +28,8 @@ If the Chrome Extension gate cannot prove a controllable Xiaohongshu tab in the 
 
 Get笔记 is an optional enhancement layer, not a live-collection gate. If Get笔记 is missing, unauthenticated, unauthorized, or declined by the user, continue collecting public page evidence when the Chrome gate passes. Record video body/copy extraction as `unavailable` or `not_requested`, and downgrade analysis so it does not claim video transcript, full script, or hidden video content.
 
+Do not log into, authorize, repair, or configure Get笔记 on behalf of the user. If authorization or setup is missing, ask the user to handle it or continue without the extraction layer.
+
 ## When To Use
 
 Use this when the task asks for:
@@ -370,8 +372,8 @@ Do not stop at a loose Markdown judgment unless the user explicitly asks for a b
 The report must answer the business question, not merely restate the collection:
 - why posts became popular
 - title and hook formulas
-- video copy/body/caption patterns and lane mechanisms
-- copy/comment fit: for video notes, explain how the copy structure created the comment demand and why that specific video became popular
+- video copy/body/caption patterns and lane mechanisms when extraction exists; otherwise state the missing video-content layer
+- copy/comment fit: for video notes with extracted copy, explain how the copy structure created the comment demand and why that specific video became popular; without extracted copy, limit the judgment to title, visible caption/body, public counts, and comments
 - lightweight image/text-note support from title, visible body/caption, and comments
 - comment-demand patterns
 - emotional value
@@ -416,7 +418,7 @@ Evidence boundaries:
 - Do not claim Douyin validation from Xiaohongshu evidence.
 
 Reference report shape:
-- Use data boundary first, then stats, top conclusions, title formulas, video-copy/body mechanisms, copy/comment fit for why each core video became popular, comment behavior signals, representative sample table, and next evidence gaps.
+- Use data boundary first, then stats, top conclusions, title formulas, available video-copy/body mechanisms, copy/comment fit when the copy layer exists, comment behavior signals, representative sample table, and next evidence gaps.
 
 Never let analysis rewrite raw evidence. If a conclusion needs more proof, add it as a gap or next action.
 
@@ -433,7 +435,7 @@ Before marking a search entry term, note, or comment batch complete:
 - verify comment counts and `实际记录` ranges against the written list
 - flag duplicate-system, low-comment, AI-assisted, brand/product, service-market, generic psychology, parenting, male-growth, or entertainment caveats before analysis overweights them
 - confirm the final HTML report exists when the user asked for analysis/report output
-- check the final report includes data boundary, stats, video/image split, conclusions, title formulas, video copy mechanisms, copy/comment fit, lightweight image/text observations, image-content status where relevant, comment signals, sample table, evidence gaps, Get笔记 note IDs when used, and source files
+- check the final report includes data boundary, stats, video/image split, conclusions, title formulas, available video copy mechanisms, copy/comment fit when supported, lightweight image/text observations, image-content status where relevant, comment signals, sample table, evidence gaps, Get笔记 note IDs when used, and source files
 - if image/text accepted sample count is zero, confirm the report says so explicitly rather than hiding the `图文笔记轻量观察` layer
 - check project state and handoff files match the raw file and report before pausing
 

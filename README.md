@@ -33,9 +33,11 @@ Get笔记 is optional. Without Get笔记 authorization, the Skill can still coll
 
 ## Installation
 
-Copy the Skill folder into your Codex skills directory:
+Clone or download this repository, then copy the Skill folder into your Codex skills directory:
 
 ```bash
+git clone https://github.com/Prome11/xiaohongshu-lane-research-skill.git
+cd xiaohongshu-lane-research-skill
 mkdir -p ~/.codex/skills
 cp -R skills/xiaohongshu-lane-research ~/.codex/skills/
 ```
@@ -73,7 +75,7 @@ It must stop instead of switching tools when:
 
 The Skill must not inspect cookies, local storage, passwords, private messages, notifications, backend account data, or non-public data.
 
-The Skill must not use someone else's Get笔记 account or saved note state. If Get笔记 is used, it should be authorized by the user running the workflow.
+The Skill must not use someone else's Get笔记 account or saved note state. If Get笔记 is used, it should be authorized by the user running the workflow. Codex should not log into or authorize Get笔记 for the user; if authorization is missing, record the extraction layer as unavailable or not requested.
 
 ## Evidence Boundary
 
