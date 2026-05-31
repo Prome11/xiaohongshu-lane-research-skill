@@ -14,7 +14,8 @@ This repository contains only the reusable Skill. It does not include browser se
 - public comment demand signals
 - evidence-bounded content or market opportunity research
 
-It is not a generic Xiaohongshu scraper, a private-data tool, or a Douyin automation workflow.
+It is not a generic Xiaohongshu scraper or a private-data tool.
+It is not a Douyin automation workflow.
 
 ## Requirements
 
