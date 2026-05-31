@@ -1,18 +1,34 @@
-# Xiaohongshu Lane Research Skill
+# 小红书账号内容打法研究 Skill for Codex
 
-A Codex Skill for public Xiaohongshu lane research: keyword entry terms, ranked public-note samples, comment evidence, optional Get笔记 extraction, and evidence-bounded analysis reports.
+如果一个 AI 能帮你系统研究一个赛道里的数百篇高赞笔记、优秀创作者、短视频内容和评论区反馈，你还会不知道这个赛道该怎么做爆款内容吗？
 
-This repository contains only the reusable Skill. It does not include browser sessions, credentials, private data, historical research runs, or collected Xiaohongshu samples.
+这个 Skill 基于 Codex，按照 IP 操盘手的研究方法，系统拆解一个小红书赛道里的优秀创作者和爆款笔记：他们怎么选题、标题怎么写、短视频怎么讲、评论区为什么会有反馈、用户真实需求藏在哪里。
 
-## What This Is
+已经被平台流量和用户反馈验证过的内容，才值得优先研究。和网上大多数“洗稿工具”不同，它不是帮你复制别人的内容，而是帮你完成一次面向账号起号和内容创作的赛道内容打法研究。
 
-`xiaohongshu-lane-research` helps Codex collect and analyze public Xiaohongshu evidence for:
+你得到的不只是零散素材，而是一份可复查、有证据边界的内容打法报告。它会帮你看清：
 
-- lane / 赛道 research
-- keyword-based representative samples
-- viral-note and content-mechanism analysis
-- public comment demand signals
-- evidence-bounded content or market opportunity research
+- 这个赛道的爆款内容通常在讲什么
+- 优秀创作者反复使用哪些选题角度
+- 高赞笔记的标题钩子和表达套路
+- 短视频内容如何开头、铺垫、制造共鸣或信任
+- 评论区里用户反复暴露的需求、疑虑和痛点
+- 哪些内容结构值得你借鉴，哪些只是个别偶然爆款
+
+这里的“全量研究”不是获取小红书后台全库数据，而是在你指定的入口词、排序口径和公开可访问页面范围内，尽可能系统覆盖这个赛道的高赞/爆款内容、创作者表达和评论区需求。样本量可以按你的研究深度逐步扩大；样本越多，运行时间越长，也越需要你处理登录、验证或 Get笔记授权等用户侧动作。
+
+This repository contains only the reusable Codex Skill. It does not include browser sessions, credentials, private data, historical research runs, or collected Xiaohongshu samples.
+
+## What It Helps You Research
+
+`xiaohongshu-lane-research` helps Codex study what content works in a Xiaohongshu niche:
+
+- content angles and topic selection used by strong creators
+- title hooks, promise structures, and emotional triggers
+- short-video openings, pacing, proof styles, and trust-building patterns
+- visible captions/body text and image/text-note support
+- public comment demand signals, objections, questions, and hidden needs
+- which conclusions are supported by public samples, and which need more evidence
 
 It is not a generic Xiaohongshu scraper or a private-data tool.
 It is not a Douyin automation workflow.
