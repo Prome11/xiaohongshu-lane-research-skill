@@ -1,0 +1,4 @@
+interface:
+  display_name: "Xiaohongshu Lane Research"
+  short_description: "Research Xiaohongshu lanes with keyword samples, comments, and Chrome Extension evidence gates"
+  default_prompt: "Use $xiaohongshu-lane-research through the Codex Chrome Extension to collect Xiaohongshu lane, keyword, viral-note, and public comment evidence from the user's own logged-in Chrome session."

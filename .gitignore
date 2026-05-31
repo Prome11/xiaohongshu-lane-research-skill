@@ -1,0 +1,9 @@
+.DS_Store
+*.log
+node_modules/
+.env
+.env.*
+runs/
+output/
+tmp/
+_working/
