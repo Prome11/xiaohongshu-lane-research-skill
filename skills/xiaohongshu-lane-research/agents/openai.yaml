@@ -1,4 +1,4 @@
 interface:
   display_name: "Xiaohongshu Lane Research"
-  short_description: "Research Xiaohongshu lanes with keyword samples, comments, and Chrome Extension evidence gates"
-  default_prompt: "Use $xiaohongshu-lane-research through the Codex Chrome Extension to collect Xiaohongshu lane, keyword, viral-note, and public comment evidence from the user's own logged-in Chrome session."
+  short_description: "Research Xiaohongshu content playbooks with viral samples, comments, and completion-focused evidence gates"
+  default_prompt: "Use $xiaohongshu-lane-research through the Codex Chrome Extension to collect Xiaohongshu lane, keyword, viral-note, and public comment evidence from the user's own logged-in Chrome session. Continue until the confirmed research target is complete unless the user stops, a hard browser/account block appears, or the evidence source is exhausted."

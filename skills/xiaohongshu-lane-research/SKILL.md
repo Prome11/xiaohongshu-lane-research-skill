@@ -1,6 +1,6 @@
 ---
 name: xiaohongshu-lane-research
-description: "Use when the user asks to research a Xiaohongshu lane/赛道, demand or content opportunity, market pattern, viral-note mechanism, representative keyword samples, ranking baseline, or comment-grounded public evidence. Requires the Codex Chrome Extension on the user's normal Chrome profile; stop if the Chrome gate cannot pass."
+description: "Use when the user asks to research a Xiaohongshu lane/赛道, demand or content opportunity, market pattern, viral-note mechanism, representative keyword samples, ranking baseline, or comment-grounded public evidence. Requires the Codex Chrome Extension on the user's normal Chrome profile. After the user confirms the research target, continue until the confirmed target is complete unless the user stops, a hard browser/account block occurs, or the evidence source is exhausted."
 ---
 
 # Xiaohongshu Lane Research / 小红书赛道研究
@@ -78,6 +78,22 @@ Default suggestions:
 - output split: raw evidence in `raw/*.md`, final HTML report in `analysis/*_analysis_report.html`, optional working notes in `_working/`
 
 Comment lines mean page-order records. A top-level comment counts as one line; an opened second-level reply counts as one nested line under its top-level comment.
+
+## Completion Policy
+
+After the user confirms the research target and collection scope, default to completing the full target. Do not stop after one or two notes, after one comment batch, after a checkpoint, or after a small partial sample just to ask whether to continue.
+
+Continue working until one of these stop conditions is true:
+- the confirmed target is complete: all search entry terms, accepted sample counts, comment ranges, extraction-status records, raw evidence files, requested analysis/report output, and reviewer pass are complete
+- the user explicitly asks to stop, pause, reduce scope, or change direction
+- a hard browser/account block occurs, such as Chrome Extension unavailable, wrong browser target, login required, captcha, safety verification, account attention, or inaccessible Xiaohongshu page
+- the evidence source is exhausted under the confirmed search entry terms and filters, and the remaining gap is recorded with the exact missing count and next candidate strategy
+
+Checkpoints are for durability, not permission to pause. After writing a checkpoint or raw evidence update, immediately continue with the next required candidate, comment batch, search entry term, extraction attempt, or report step unless a stop condition above is true.
+
+If context length, model limits, or tool instability force a handoff, write the current evidence state and the exact next action, mark the run as `进行中`, and make clear that the target is not complete. Do not present a partial run as the final answer.
+
+Get笔记 unavailability is not a stop condition. Continue without the video body/copy layer and mark the extraction status as `unavailable`, `failed`, or `not_requested`.
 
 ## Chrome Extension Gate
 
@@ -258,7 +274,7 @@ Default target:
 - include first-level comments and opened second-level replies in page order
 - preserve usernames when present
 - if fewer than 30 lines are available, record all available lines and state the actual range
-- if the user asks for deeper comment evidence, collect up to 50 lines by default before pausing
+- if the user asks for deeper comment evidence, collect up to 50 lines by default per accepted note before moving to the next required sample
 
 Collection order:
 1. Confirm the note URL and comment area from `tab.url()`, `tab.title()`, and one fresh `tab.playwright.domSnapshot()`.
@@ -272,7 +288,7 @@ Collection order:
 
 Do not expand all replies by default. Expand only what is needed to preserve the requested first-N order or a user-specified range.
 
-## Context-Safe Limits
+## Checkpoint Policy
 
 Checkpoint triggers:
 - after the Chrome Extension gate is recorded
@@ -281,15 +297,16 @@ Checkpoint triggers:
 - after every accepted representative note
 - after each comment collection batch for a note
 - before switching search entry terms
-- before any planned pause, model switch, or new session
+- before any unavoidable tool/model handoff
 
-Session caps:
-- stop after 2 opened detail pages total unless the user explicitly asked for a deeper live run
-- stop after 1 accepted note when 30-50 comment lines were collected
-- stop after 2 consecutive no-comment or scope-note pages; write the low-yield pattern and next candidate strategy
-- do not open more than 2 detail pages after a checkpoint without updating durable state
+Checkpoint requirements:
+- update the raw evidence file or working state with what has been collected so far
+- record accepted sample count, rejected/scope-note candidates, actual comment ranges, extraction status, and remaining target gap
+- after the checkpoint, continue toward the confirmed target unless a stop condition in `Completion Policy` is true
 
-When a cap is hit, finish the current raw entry, update project state files when working inside a project, and pause live collection with the next exact candidate or action.
+Low-yield handling:
+- after 2 consecutive no-comment, irrelevant, duplicate, or scope-note pages, write the low-yield pattern and switch to the next candidate strategy
+- do not stop solely because of low yield unless the confirmed evidence source is exhausted
 
 ## Raw File Shape
 
@@ -437,7 +454,7 @@ Before marking a search entry term, note, or comment batch complete:
 - confirm the final HTML report exists when the user asked for analysis/report output
 - check the final report includes data boundary, stats, video/image split, conclusions, title formulas, available video copy mechanisms, copy/comment fit when supported, lightweight image/text observations, image-content status where relevant, comment signals, sample table, evidence gaps, Get笔记 note IDs when used, and source files
 - if image/text accepted sample count is zero, confirm the report says so explicitly rather than hiding the `图文笔记轻量观察` layer
-- check project state and handoff files match the raw file and report before pausing
+- check project state and handoff files match the raw file and report before final delivery or unavoidable handoff
 
 Reviewer status:
 - `通过`: the evidence chain is internally consistent and meets the target

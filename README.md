@@ -79,6 +79,8 @@ Use $xiaohongshu-lane-research to research this Xiaohongshu lane.
 
 The Skill requires the collection setup before opening Xiaohongshu. If required fields are missing, Codex should ask for confirmation first.
 
+Once the research target is confirmed, Codex should keep working until the target is complete. It should not stop after one or two notes just to ask whether to continue. It should only stop when the agreed target is complete, the user explicitly stops or changes scope, a hard browser/account block appears, or the available evidence source is exhausted and the remaining gap is documented.
+
 ## Safety Boundary
 
 The Skill should only collect public visible information from Xiaohongshu pages in the user's own logged-in Chrome session.
