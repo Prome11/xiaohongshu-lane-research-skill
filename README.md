@@ -112,6 +112,12 @@ Xiaohongshu evidence is public sample evidence. It can show what public notes an
 
 Keep facts, assumptions, gaps, and next actions separate.
 
+## Maintenance Rule
+
+When this Skill is updated and synced to GitHub, the update must include a dated `CHANGELOG.md` entry that says what changed and why. If the change affects user-facing behavior, keep `README.md` and `skills/xiaohongshu-lane-research/SKILL.md` consistent. After pushing, report the branch, commit SHA, and a brief summary of the changed behavior.
+
+Silent GitHub syncs do not pass handoff.
+
 ## License
 
 MIT

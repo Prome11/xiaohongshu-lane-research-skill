@@ -7,3 +7,4 @@
 - Added the fixed lane-research report framework: `视频文案、评论反馈与爆款机制反推`, `先给结论`, title formulas, `文案怎么讲，评论怎么接`, image/text observation, comment behavior, entry-term mechanism, representative sample breakdown, and next evidence gaps.
 - Blocked reviewer pass for skipped or unchecked video extraction states.
 - Clarified report output behavior: summarize what each video says from Get笔记 oral transcript/body evidence, and provide transcript evidence paths plus note IDs instead of pasting full transcripts into the main report by default.
+- Added a maintenance rule for GitHub syncs: every Skill update must record what changed in `CHANGELOG.md`, keep user-facing docs aligned, and report the verified commit SHA plus behavior summary after push.

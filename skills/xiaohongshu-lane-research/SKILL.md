@@ -480,6 +480,15 @@ Reference report shape:
 
 Never let analysis rewrite raw evidence. If a conclusion needs more proof, add it as a gap or next action.
 
+## Skill Maintenance And GitHub Sync
+
+When this skill itself is edited and synced to the public GitHub repository:
+- update `CHANGELOG.md` with the date, what changed, and why it changed
+- keep `README.md` and `skills/xiaohongshu-lane-research/SKILL.md` consistent when behavior changes
+- after pushing, verify `origin/main` or the target branch and report the branch, commit SHA, and behavior summary to the user
+
+Silent GitHub syncs do not pass handoff.
+
 ## Reviewer Pass
 
 Before marking a search entry term, note, or comment batch complete:
