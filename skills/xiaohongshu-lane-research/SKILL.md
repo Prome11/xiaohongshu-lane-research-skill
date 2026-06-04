@@ -445,6 +445,12 @@ Required title and section order:
 
 The report's core analytical lens is always `文案怎么讲 × 评论怎么接 × 为什么火`. If video-copy evidence is missing, preserve that lens but downgrade the body-copy part explicitly instead of changing the report structure.
 
+When Get笔记 video body/copy evidence exists, the report should summarize what each video says instead of pasting the full transcript into the main report. Provide a separate transcript/source path for users who want to inspect the original oral text:
+- In the representative sample table, include a `视频内容讲了什么（基于 Get笔记口播稿）` or equivalent summary column.
+- Keep full `web_content` oral transcript/body text in raw evidence or a separate transcript evidence file, not as the default report body.
+- The report footer or evidence section must list the transcript evidence path, the Get笔记 note IDs, and the command pattern to re-fetch `web_content`.
+- If the user explicitly asks for full transcripts in the report body, include them in a clearly separated appendix, not mixed into conclusions or sample analysis.
+
 For single-entry runs, such as one lane entry term with 5 accepted notes, write the report at sample-cluster level instead of pretending there is cross-keyword coverage.
 
 Comment signal rules:
@@ -462,6 +468,7 @@ Evidence boundaries:
 - Do not treat Get笔记 `content` as raw Xiaohongshu copy; label it as Get笔记-extracted/AI-organized content.
 - Do not claim to know what a Xiaohongshu image says just because Get笔记 returned an image URL. Image content requires OCR/vision evidence or must be listed as unknown.
 - Do not ignore video body/copy evidence after it is available; title/comment-only analysis is incomplete for video-led final reports when Get笔记 extraction succeeded.
+- Do not treat transcript text as the report's analysis. Use it as source evidence, summarize what the video says, and provide a path to the transcript for audit.
 - Do not treat missing Get笔记 as a failed collection. Treat it as a missing video-content layer and clearly downgrade the analysis.
 - Do not keep video copy and comments in separate silos when video copy exists. When it does not exist, explicitly say the copy/comment fit cannot be fully judged.
 - If a conclusion depends on unopened follow-up candidates, put it under `下一轮补证`.
@@ -486,7 +493,7 @@ Before marking a search entry term, note, or comment batch complete:
 - verify comment counts and `实际记录` ranges against the written list
 - flag duplicate-system, low-comment, AI-assisted, brand/product, service-market, generic psychology, parenting, male-growth, or entertainment caveats before analysis overweights them
 - confirm the final HTML report exists when the user asked for analysis/report output
-- check the final report follows the fixed lane-research report framework and includes data boundary, stats, video/image split, conclusions, title formulas, available video copy mechanisms, copy/comment fit when supported, lightweight image/text observations, image-content status where relevant, comment signals, sample table, evidence gaps, Get笔记 note IDs when used, and source files
+- check the final report follows the fixed lane-research report framework and includes data boundary, stats, video/image split, conclusions, title formulas, available video copy mechanisms, copy/comment fit when supported, lightweight image/text observations, image-content status where relevant, comment signals, sample table, evidence gaps, Get笔记 note IDs when used, transcript evidence paths when video extraction is used, and source files
 - if image/text accepted sample count is zero, confirm the report says so explicitly rather than hiding the `图文笔记轻量观察` layer
 - check project state and handoff files match the raw file and report before final delivery or unavoidable handoff
 

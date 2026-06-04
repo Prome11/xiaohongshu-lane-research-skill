@@ -50,6 +50,8 @@ Get笔记 is an optional dependency layer, not a live-collection gate. For video
 
 For Xiaohongshu video notes, substantive Get笔记 `web_content` is the primary video body/copy evidence layer and may include the video's oral transcript/ASR text. Get笔记 `content` is the AI-organized summary/structured layer, not the primary transcript. If Get笔记 is unavailable, the Skill can still collect ranked public notes, URLs, titles, visible captions/body text, counts, and public comments, but the final report must downgrade video-body claims accordingly.
 
+The final report should not paste full oral transcripts into the main body by default. Codex should use the Get笔记 transcript/body evidence to summarize what each video says, then provide transcript evidence paths, Get笔记 note IDs, and re-fetch commands for audit.
+
 ## Installation
 
 In Codex, send this message:
