@@ -79,6 +79,8 @@ The Skill requires the collection setup before opening Xiaohongshu. If required 
 
 Once the research target is confirmed, Codex should keep working until the target is complete. It should not stop after one or two notes just to ask whether to continue. It should only stop when the agreed target is complete, the user explicitly stops or changes scope, a hard browser/account block appears, or the available evidence source is exhausted and the remaining gap is documented.
 
+For live Xiaohongshu collection, Codex should use the visible Xiaohongshu search box for every entry term. It should not navigate directly to constructed `search_result` URLs. After visible search, Codex should run one search-entry filter probe first, change only one visible UI state at a time, confirm active filters from the expanded panel, record the current sorted page order, then collect one note at a time. Do not batch-click filters or scrape candidates before the visible filter state is proven.
+
 ## Safety Boundary
 
 The Skill should only collect public visible information from Xiaohongshu pages in the user's own logged-in Chrome session.

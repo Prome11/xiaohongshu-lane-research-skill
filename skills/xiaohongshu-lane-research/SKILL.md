@@ -130,6 +130,22 @@ Use the cheapest reliable page signal:
 
 Do not repeatedly dump whole-page text. Prefer one orientation snapshot, then scoped extraction from search results, detail content, or the comment container.
 
+## Human-Paced Visible UI Discipline
+
+Use the same visible, slow, one-action-at-a-time path a user would naturally use. Do not collect from stale or unstable page state.
+
+For live collection:
+- Prefer claiming an already-open normal Chrome Xiaohongshu tab when one exists. If a new tab must be opened, load Xiaohongshu, wait for the visible home/search page to settle, and verify URL/title/DOM before any search or filter action.
+- Enter every search entry term through the visible Xiaohongshu search box. Click the current search input, clear existing text if needed, type the keyword, and submit with the visible search control or Enter. Do not navigate directly to constructed `search_result` URLs for live collection.
+- After the visible search submits, wait for result cards and the filter control, then take a fresh snapshot/screenshot before interacting.
+- For video-led or video-only research, select the visible `视频` tab before the ranking filters unless the user explicitly asks for all-content ranking. Verify the active tab or video-style result cards before opening the filter panel. If you keep `全部` as the ranking surface, record that as a deliberate scope choice.
+- Use visible UI events for clicks. It is acceptable to use DOM/locator reads to identify current targets and bounding boxes after a fresh snapshot, but do not mutate DOM state, dispatch synthetic events, call hidden APIs, or rely on stale selectors. When possible, click the current visible target center from its live bounds.
+- One UI transition means one action: navigate, wait, re-read; click tab, wait, re-read; open filter, wait, re-read; click one filter option, wait, re-read. Do not chain search, tab, sort, time, and candidate extraction in one uninterrupted script.
+- Use modest human-paced waits after visible transitions, especially after search navigation, tab switches, filter-option clicks, returning from detail pages, and comment scrolling. A fixed wait plus a fresh page-state check is better than racing the UI.
+- Do not run multi-keyword or multi-note batch loops until a single keyword's ranking gate has passed and the current sorted DOM order has been recorded.
+- After the ranking gate passes, collect one accepted note at a time from the current page order: open the note, record address/title/counts/content boundary, optionally get the share link/Get笔记 layer, collect comments, return to the ranking page, then re-confirm page state before opening the next note.
+- If any step opens the wrong page, returns empty results unexpectedly, changes the active tab, or shows `已筛选` without expanded-chip proof, stop the current candidate path and restore the ranking gate before counting any sample.
+
 ## Sample Mix And Optional Content Extraction
 
 The old collection path often over-weighted title and comments because visible note body/caption was hard to extract. For video-led lane research, use Get笔记 when it is available and authorized by the user. When it is not available, keep the evidence boundary explicit instead of blocking the whole collection.
@@ -178,22 +194,27 @@ Validation note:
 - A successful Get笔记 extraction proves only that the tool returned accessible public note content for that run. It does not prove Get笔记 can read text inside images or recover unavailable private data.
 - In this skill, use Get笔记 as the preferred extraction layer for video-note copy/body work when available and authorized; keep image/text notes lightweight unless the user separately asks for OCR/vision.
 
-## Search Entry For Lane Evidence
+## Visible Search Entry For Lane Evidence
 
-For lane evidence collection, use keyword/search entry terms with the same stable note-search entry that prior successful runs used:
+For lane evidence collection, search entry terms must be entered through Xiaohongshu's visible search UI in the already claimed user Chrome tab.
 
-```text
-https://www.xiaohongshu.com/search_result/?keyword=<encoded keyword>&source=web_search_result_notes&type=51
-```
+For each entry term:
+- Start from a verified Xiaohongshu home, explore, or search page in the user's normal Chrome tab.
+- Use the visible search box. Click it, clear any old term, type the current entry term, and submit with the visible search control or Enter.
+- Wait for the visible search results page to settle.
+- Verify the search box, page title, or DOM shows the requested entry term.
+- Verify visible result cards and the filter control exist before applying ranking filters.
+- Record the resulting address-bar URL as evidence only after the visible search has completed.
 
-Run this navigation only inside the already claimed user Chrome tab. After navigation, verify:
-- the URL contains `search_result`
-- the search entry term is present
-- `source=web_search_result_notes`
-- `type=51`
-- the page title or DOM shows a Xiaohongshu search result page
+Do not construct or navigate directly to `search_result` URLs for live collection. Do not replace the visible search route with hidden APIs, backend endpoints, browser history manipulation, address-bar URL templates, or prebuilt `source=web_search_result_notes&type=51` links.
 
-Do not treat `source=web_explore_feed` as equivalent for ranking/filter collection. If a search entered from the home or explore feed lands on `source=web_explore_feed`, switch the claimed tab to the stable note-search entry above before applying ranking filters.
+Before full collection, run a single-keyword filter probe:
+- Use the first confirmed search entry term.
+- Establish the intended ranking surface (`视频` for video-led/video-only research unless explicitly scoped otherwise; `全部` only when all-content ranking is intended).
+- Apply the ranking/time filters using the human-paced visible UI discipline above.
+- Verify active chips from the expanded filter panel and record the first visible sorted page order.
+- Only after this probe passes may you continue to collect the target number of notes or repeat the route for additional entry terms.
+- If the probe triggers safety verification, empty results, or an unstable page, record the exact failing action and do not proceed to batch collection. After the user clears verification, restart the probe from a fresh search-page state; do not reuse pre-verification candidates.
 
 For the default `最多点赞 + 半年内` gate:
 - open the filter panel with the current visible filter icon selector, preferably `.filter-icon`, after a fresh page snapshot proves the search page
@@ -208,7 +229,7 @@ Do not chain coordinate clicks inside the filter panel. A click on `最多点赞
 
 Do not reuse bare screen coordinates across pages, after navigation, after a filter option click, after returning from a detail page, or after any `已筛选` state change. If coordinate clicks are necessary, first read the target element's current bounding box from the live page and verify the panel is open before each individual filter-option click. If clicking the outer `div.filter` does not open the panel, click `.filter-icon` before falling back to measured coordinates.
 
-If a filter attempt opens a note detail page before the ranking gate is complete, mark that page as `opened before sorting gate`, do not count it as an accepted sample, go back to the stable search URL, and restart the sorting gate from a fresh page snapshot.
+If a filter attempt opens a note detail page before the ranking gate is complete, mark that page as `opened before sorting gate`, do not count it as an accepted sample, go back to the search results page through normal browser back or by re-running the visible search-box route, and restart the sorting gate from a fresh page snapshot.
 
 If the page shows `安全验证`, captcha-like image selection, `请选择最符合描述的两张图片`, or another account-attention challenge, stop live collection, record `chrome-plugin needs user attention`, and wait for the user to complete it. Do not solve the challenge, route around it, switch browsers, switch profiles, use a debug-port browser, or continue by treating pre-challenge results as the final filtered order.
 
