@@ -50,13 +50,11 @@ Get笔记 is optional. Without Get笔记 authorization, the Skill can still coll
 
 ## Installation
 
-Clone or download this repository, then copy the Skill folder into your Codex skills directory:
+In Codex, send this message:
 
-```bash
-git clone https://github.com/Prome11/xiaohongshu-lane-research-skill.git
-cd xiaohongshu-lane-research-skill
-mkdir -p ~/.codex/skills
-cp -R skills/xiaohongshu-lane-research ~/.codex/skills/
+```text
+Use $skill-installer to install:
+https://github.com/Prome11/xiaohongshu-lane-research-skill/tree/main/skills/xiaohongshu-lane-research
 ```
 
 Restart Codex so the new Skill is discovered.
