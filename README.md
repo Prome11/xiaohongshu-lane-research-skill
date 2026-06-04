@@ -42,11 +42,13 @@ This Skill is meant for Codex Desktop. Live collection requires the user running
 - the Codex Chrome Extension installed and enabled in the user's own Chrome profile
 - the user's own logged-in Xiaohongshu session
 - user attention available for login, captcha, safety checks, or account prompts
-- `getnote` configured and authorized with the user's own account when video-note body/caption extraction is desired
+- `getnote` configured and authorized with the user's own account when the confirmed scope includes video-note body/caption extraction
 
 The Skill cannot package or transfer anyone's browser login state. Each user must use their own Chrome profile and their own Xiaohongshu account.
 
-Get笔记 is optional. Without Get笔记 authorization, the Skill can still collect ranked public notes, URLs, titles, visible captions/body text, counts, and public comments. The difference is analytical: Codex must mark video body/copy extraction as unavailable and avoid claims about full video scripts, transcripts, or hidden video content.
+Get笔记 is an optional dependency layer, not a live-collection gate. For video-led lane research, the Get笔记 decision/status is mandatory: Codex should either extract the video body/copy layer, record a concrete unavailable/failed/declined status, or record the user's explicit pre-collection no-Get笔记 scope. It must not silently skip the check and later call it `not_requested`.
+
+For Xiaohongshu video notes, substantive Get笔记 `web_content` is the primary video body/copy evidence layer and may include the video's oral transcript/ASR text. Get笔记 `content` is the AI-organized summary/structured layer, not the primary transcript. If Get笔记 is unavailable, the Skill can still collect ranked public notes, URLs, titles, visible captions/body text, counts, and public comments, but the final report must downgrade video-body claims accordingly.
 
 ## Installation
 
